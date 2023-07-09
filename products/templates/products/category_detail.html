@@ -1,0 +1,21 @@
+<!-- product_list.html -->
+{% extends 'main/base.html' %}
+{% block content  %}
+    <h1>List</h1>
+    <ul class="product-list">
+        {% for product in object.products_set.all %}
+        <li class="product-item">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+            <span class="product-name">{{ product.name }}</span>
+            <br>
+            Quantity: <span class="product-quantity">{{ product.quantity }}</span>
+            <br>
+            Price: <span class="product-price">${{ product.price }}</span>
+            <br>
+            Category: <span class="product-category">{{ product.category.name }}</span>
+        </li>
+        {% empty %}
+        <li>No products available.</li>
+        {% endfor %}
+    </ul>
+{% endblock content  %}
