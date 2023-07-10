@@ -7,26 +7,68 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 </head>
 <body>
-  <div class="navbar">
-    <h2 class="nav-logo">Mero Pasal</h1>
-    <a class="nav-item" href="{% url 'category-list' %}"><i class="fas fa-home"></i> Home</a>
-    <a class="nav-item" href="{% url 'product-list' %}"><i class="fas fa-box"></i> All Products</a>
-    <form class="search-form" action="{% url 'searchbar' %}" method="GET">
-      <input class="search-input" type="text" name="search" placeholder="Search"/>
-      <button class="search-button" type="submit"><i class="fas fa-search"></i></button>
-    </form>
-    {% if user.is_authenticated %}
-      <a class="nav-item" href="{% url 'cart' %}"><i class="fas fa-shopping-cart"></i> Cart</a>
-      <a class="nav-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
-    {% else %}
-      <a class="nav-item" href="{% url 'login' %}"><i class="fas fa-user"></i> Login</a>
-      <a class="nav-item" href="{% url 'register' %}"><i class="fas fa-user-plus"></i> Register</a>
-    {% endif %}
 
-  </div>
+  <nav>
+    <div class="menu-icon">
+       <span class="fas fa-bars"></span>
+    </div>
+    <div class="logo">
+       FoE
+    </div>
+    <div class="nav-items">
+       <li><a href="{% url 'category-list' %}">Home</a></li>
+       <li><a href="{% url 'product-list' %}">Products</a></li>
+       {% if user.is_authenticated %}
+          <li><a href="{% url 'cart' %}">Cart</a></li>
+          <li><a href="#">Profile</a></li>
+          <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+        <li><a href="{% url 'login' %}">Login</a></li>
+        <li><a href="{% url 'register' %}">Rgister</a></li>
+        {% endif %}
+    </div>
+    <div class="search-icon">
+       <span class="fas fa-search"></span>
+    </div>
+    <div class="cancel-icon">
+       <span class="fas fa-times"></span>
+    </div>
+    <form  action="{% url 'searchbar' %}" method="GET">
+       <input type="search" class="search-data" name="search" placeholder="Search" required>
+       <button type="submit" class="fas fa-search"></button>
+    </form>
+ </nav>
+ {% block content %}
+ {% endblock content %}
+ <script>
+    const menuBtn = document.querySelector(".menu-icon span");
+    const searchBtn = document.querySelector(".search-icon");
+    const cancelBtn = document.querySelector(".cancel-icon");
+    const items = document.querySelector(".nav-items");
+    const form = document.querySelector("form");
+    menuBtn.onclick = ()=>{
+      items.classList.add("active");
+      menuBtn.classList.add("hide");
+      searchBtn.classList.add("hide");
+      cancelBtn.classList.add("show");
+    }
+    cancelBtn.onclick = ()=>{
+      items.classList.remove("active");
+      menuBtn.classList.remove("hide");
+      searchBtn.classList.remove("hide");
+      cancelBtn.classList.remove("show");
+      form.classList.remove("active");
+      cancelBtn.style.color = "#ff3d00";
+    }
+    searchBtn.onclick = ()=>{
+      form.classList.add("active");
+      searchBtn.classList.add("hide");
+      cancelBtn.classList.add("show");
+    }
+ </script>
 </body>
-{% block content %}
-{% endblock content %}
+
 </html>

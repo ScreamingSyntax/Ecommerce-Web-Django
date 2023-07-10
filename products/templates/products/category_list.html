@@ -9,10 +9,7 @@
                 <div class="category-details">
                     <h2 class="category-name">{{ category.name }}</h2>
                     <p class="category-description">{{ category.description }}</p>
-                    <button class="view-products-btn"><a href="{% url 'category-detail' category.id %}">View Products</a></button>
-                
-                
-                
+                    <button class="view-products-btn"><a href="{% url 'category-detail' category.id %}">View Products</a></button>   
                 </div>
             </div>
         {% empty %}
