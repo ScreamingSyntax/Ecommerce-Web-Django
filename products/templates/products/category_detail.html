@@ -6,7 +6,8 @@
         {% for product in object.products_set.all %}
         <li class="product-item">
             <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
-            <span class="product-name">{{ product.name }}</span>
+            <span class="product-name">
+                <a href="{% url 'product-detail' product.id %}">  {{product.name}} </a>
             <br>
             Quantity: <span class="product-quantity">{{ product.quantity }}</span>
             <br>

@@ -6,21 +6,22 @@
   <link rel="stylesheet" href="{% static 'main/main.css' %}">
 </head>
 <body>
-  <!-- Navigation bar markup -->
-  <div class="navbar">
+  <div class ="navbar">
     <a href="{% url 'category-list' %}">Home</a>
     <a href="{% url 'product-list' %}">All Products</a>
     {% if user.is_authenticated %}
-    <a href="#contact">Cart</a>
+    <a href="{% url 'cart' %}">Cart</a>
     <a href="{% url 'logout' %}">Logout</a>
     {% else %}
     <a href="{%url 'login' %}">Login</a>
     <a href="{%url 'register'%}">Register</a>
     {% endif %}
+    <form action="{% url 'searchbar' %}" method="GET">
+    <input type="text" name="search"/>
+    <button type="submit">search</button>
+    </form>
   </div>
 </body>
 {% block content %}
-
-
 {% endblock content %}
 </html>

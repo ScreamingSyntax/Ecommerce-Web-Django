@@ -6,11 +6,17 @@ from django.contrib import messages
 from django.views.generic.edit import FormView
 from django.urls import reverse_lazy
 # from django.contrib.auth.
+from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
 
 class UserRegisterView(FormView):
     template_name = 'main/register.html'
     form_class = UserRegistrationForm
     success_url= reverse_lazy('login')
+    def get(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            return redirect('category-list')
+        return super().get(request, *args, **kwargs)
 
     def form_valid(self, form):
         form.save()
