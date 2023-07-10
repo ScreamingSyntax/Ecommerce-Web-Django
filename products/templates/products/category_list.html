@@ -1,18 +1,22 @@
 {% extends 'main/base.html' %}
-{% block content  %}
-    <h1>category List</h1>
-    <ul class="category-list">
-        {% for category in categories %}
-        <li class="category-item">
-            <span class="category-name">{{ category.name }}</span>
-            <br>
-            Quantity: <span class="category-quantity">{{ category.description }}</span>
-            <br>
-            <button> <a href={% url 'category-detail' category.id %}>View Products</a></button>
-        </li>
-        {% empty %}
-        <li>No categories available.</li>
-        {% endfor %}
-    </ul>
-{% endblock content  %}
 
+{% block content %}
+    <h1 class="category-heading">Category List</h1>
+    <div class="category-container">
+        {% for category in categories %}
+            <div class="category-card {{ category.name|lower }}">
+                <img class="category-image" src="{{ category.image.url }}" alt="{{ category.name }} Image">
+                <div class="category-details">
+                    <h2 class="category-name">{{ category.name }}</h2>
+                    <p class="category-description">{{ category.description }}</p>
+                    <button class="view-products-btn"><a href="{% url 'category-detail' category.id %}">View Products</a></button>
+                
+                
+                
+                </div>
+            </div>
+        {% empty %}
+            <p>No categories available.</p>
+        {% endfor %}
+    </div>
+{% endblock content %}

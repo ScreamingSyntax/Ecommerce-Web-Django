@@ -4,22 +4,27 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{% static 'main/main.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class ="navbar">
-    <a href="{% url 'category-list' %}">Home</a>
-    <a href="{% url 'product-list' %}">All Products</a>
-    {% if user.is_authenticated %}
-    <a href="{% url 'cart' %}">Cart</a>
-    <a href="{% url 'logout' %}">Logout</a>
-    {% else %}
-    <a href="{%url 'login' %}">Login</a>
-    <a href="{%url 'register'%}">Register</a>
-    {% endif %}
-    <form action="{% url 'searchbar' %}" method="GET">
-    <input type="text" name="search"/>
-    <button type="submit">search</button>
+  <div class="navbar">
+    <h2 class="nav-logo">Mero Pasal</h1>
+    <a class="nav-item" href="{% url 'category-list' %}"><i class="fas fa-home"></i> Home</a>
+    <a class="nav-item" href="{% url 'product-list' %}"><i class="fas fa-box"></i> All Products</a>
+    <form class="search-form" action="{% url 'searchbar' %}" method="GET">
+      <input class="search-input" type="text" name="search" placeholder="Search"/>
+      <button class="search-button" type="submit"><i class="fas fa-search"></i></button>
     </form>
+    {% if user.is_authenticated %}
+      <a class="nav-item" href="{% url 'cart' %}"><i class="fas fa-shopping-cart"></i> Cart</a>
+      <a class="nav-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    {% else %}
+      <a class="nav-item" href="{% url 'login' %}"><i class="fas fa-user"></i> Login</a>
+      <a class="nav-item" href="{% url 'register' %}"><i class="fas fa-user-plus"></i> Register</a>
+    {% endif %}
+
   </div>
 </body>
 {% block content %}

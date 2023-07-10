@@ -9,7 +9,7 @@ from order.models import Cart
 from django.contrib import messages
 class ProductForm(CreateView):
     model = Products
-    fields = ['name','quantity','image','category','price']
+    fields = ['name','sub_title','description','quantity','image','category','price']
 
 class ProductsListView(ListView):
     model = Products
@@ -19,6 +19,12 @@ class ProductsListView(ListView):
 class CategoryListView(ListView):
     model = Category
     context_object_name='categories'
+    template_name='products/category_list.html'
+    # ordering[]
+    def get_context_data(self,**kwargs):
+       context = super().get_context_data(**kwargs)
+       context['categories']= Category.objects.all()
+       return context
 
 
 class CategoryDetailView(DetailView):
@@ -40,10 +46,6 @@ class ProductDetailView(DetailView):
           messages.success(self.request,'Successfully added the product to cart')
           return HttpResponseRedirect(self.request.path_info)
       else:
-        # cart = cart_check.first()
-        # cart.quantity+=1
-        # cart.save()
-        # print(Cart.objects.all().first().quantity)
          cart = cart_check.first()
          if(cart.quantity < cart.product.quantity):
            cart.quantity+=1

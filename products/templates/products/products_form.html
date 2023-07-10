@@ -1,9 +1,17 @@
 {% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+
 {% block content %}
-    <h1>Create Product</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Create</button>
-    </form>
+<div class="container">
+  <h1 class="heading">Create Product</h1>
+  <form method="post" enctype="multipart/form-data" class="form">
+    {% csrf_token %}
+    <div class="form-group">
+      {{ form.as_p }}
+    </div>
+    <div class="form-group">
+      <button type="submit" class="form-submit">Create</button>
+    </div>
+  </form>
+</div>
 {% endblock content %}
