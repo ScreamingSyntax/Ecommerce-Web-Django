@@ -34,7 +34,7 @@ class CartView(LoginRequiredMixin,ListView):
         return render(self.request,'order/cart_list.html',context)
         # return HttpResponse(self.request,"Hello")
 
-class DeleteCart(TemplateView):
+class DeleteCart(LoginRequiredMixin,TemplateView):
     # template_name='order/cart_list.html'
     template_name = 'order/cart_list.html'
 
@@ -49,7 +49,7 @@ class DeleteCart(TemplateView):
     # print(f'thsi si product_id {pk}')
     # return reverse_lazy('cart_list')
 
-class IncrementCart(TemplateView):
+class IncrementCart(LoginRequiredMixin,TemplateView):
     template_name='order/cart_list.html'
     def get(self,request,*args,**kwargs):
         cart_id = request.GET.get('product_obj')
@@ -60,7 +60,7 @@ class IncrementCart(TemplateView):
         cart_item.save()
         return redirect('cart')
 
-class DecrementCart(TemplateView):
+class DecrementCart(LoginRequiredMixin,TemplateView):
     template_name='order/cart_list.html'
     def get(self,request,*args,**kwargs):
         cart_id = request.GET.get('product_obj')
@@ -75,7 +75,7 @@ class DecrementCart(TemplateView):
             cart_item.save()
         return redirect('cart')
     
-class OrderCheckoutForm(CreateView):
+class OrderCheckoutForm(LoginRequiredMixin,CreateView):
     model = Orders
     fields=['shipping_address','user_city','user_mobile']
     def form_valid(self, form):
@@ -99,7 +99,7 @@ class OrderCheckoutForm(CreateView):
 # class OrderCustomerView(ListView):
 #     model= Order
 #     context_object_name='objects'
-class OrderStatus(TemplateView):
+class OrderStatus(LoginRequiredMixin,TemplateView):
     template_name='order/order_status.html'
     def get(self,request):
         user = self.request.user

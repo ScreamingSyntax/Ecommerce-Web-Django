@@ -12,10 +12,11 @@ from django.views.generic import UpdateView,TemplateView
 from django import forms
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
-from main.forms import UserUpdateForm,ProfileUpdateForm
+from main.forms import UserUpdateForm,ProfileUpdateForm,UserRegistrationForm
+from django.contrib.auth.decorators import login_required
 class UserRegisterView(FormView):
     template_name = 'main/register.html'
-    form_class = UserCreationForm
+    form_class = UserRegistrationForm
     success_url= reverse_lazy('login')
     def get(self, request, *args, **kwargs):
         if self.request.user.is_authenticated:
@@ -73,7 +74,7 @@ class UserRegisterView(FormView):
     #     context['profile']=profile
     #     return context
 
-
+@login_required
 def profile(request):  
     if(request.method == 'POST'):
         p_form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
