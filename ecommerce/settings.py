@@ -23,8 +23,6 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'order.apps.OrderConfig',
     'products.apps.ProductsConfig',
-    'crispy_forms',
-    'crispy_bootstrap5',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -114,5 +112,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL= 'login'
 LOGIN_REDIRECT_URL= 'category-list'
 LOGOUT_REDIRECT_URL= 'category-list'
-CRISPY_ALLOWED_TEMPLATE_PACK='bootstrap5'
-CRISPY_TEMPLATE_PACK = 'bootstrap5'

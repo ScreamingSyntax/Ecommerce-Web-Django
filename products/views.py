@@ -23,7 +23,11 @@ class CategoryListView(ListView):
     # ordering[]
     def get_context_data(self,**kwargs):
        context = super().get_context_data(**kwargs)
+       most_viwed=Products.objects.order_by('-viwed_times')[:3]
+       most_sold = Products.objects.order_by('-sold_times')[:3]
        context['categories']= Category.objects.all()
+       context['most_viwed']= most_viwed
+       context['most_sold']= most_sold
        return context
 
 
@@ -32,6 +36,14 @@ class CategoryDetailView(DetailView):
 
 class ProductDetailView(DetailView):
     model = Products
+    def get(self,request,pk):
+       product_detail = Products.objects.get(id=pk)
+       product_detail.viwed_times+=1
+       product_detail.save()
+       context = {
+          'object':product_detail
+       }
+       return render(request,'products/products_detail.html',context)
     def post(self,request,pk):
       if not self.request.user.is_authenticated:
           return redirect('login')
@@ -63,19 +75,15 @@ class SearchProductView(TemplateView):
     template_name="products/search_product.html"
     def get(self,request,*args,**kwargs):
         # print(self.request.user)
-        user = self.request.user
-        # print(user.cart_set.all())
-        user_cart = user.cart_set.all()
         product_name = self.request.GET['search']
         filtered_products = Products.objects.filter(name=product_name)
         context= {
             'searched_products':filtered_products,
         }
-        return render(request,'products/search_product.html',context)
-    
+        return render(request,'products/search_product.html',context) 
     # def post()
 
-class SearchAddToCart(TemplateView):
+class SearchAddToCart(LoginRequiredMixin,TemplateView):
     template_name="products/search_product.html"
     def post(self,request,pk,*args,**kwargs):
         if not self.request.user.is_authenticated:

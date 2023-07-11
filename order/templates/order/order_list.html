@@ -1,0 +1,9 @@
+{% extends 'main/base.html' %}
+{% block content %}
+    {% for order in objects %}
+    {% comment %} {% for products in order.user_cart %}
+        <h1>Hello</h1>
+    {% endfor %} {% endcomment %}
+    {{order.user_cart}}
+    {% endfor %}
+{% endblock content %}

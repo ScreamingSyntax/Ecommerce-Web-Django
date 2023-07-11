@@ -7,35 +7,33 @@
                 <th class="cart-header">Image</th>
                 <th class="cart-header">Name</th>
                 <th class="cart-header">Quantity</th>
-                <th class="cart-header">Price</th>
-                <th class="cart-header">ADD</th>
-                <th class="cart-header">SUB</th>
-                <th class="cart-header">DEL</th>
+                <th class="cart-header">Price for one</th>
+                <th class="cart-header">Total</th>
             </tr>
         </thead>
         <tbody>
             {% for cart in carts %}
             <tr>
                 <td><img src="{{cart.product.image.url}}" class="cart-image" /></td>
-                <td><small>{{cart.product.name}}</small></td>
-                <td><small>{{cart.quantity}}</small></td>
-                <td><small>Rs {{cart.product.price}}</small></td>
-                
+                <td class='cart-data' ><small>{{cart.product.name}}</small></td>
+                <td class='cart-data'><small>{{cart.quantity}}</small></td>
+                <td class='cart-data'><small>Rs {{cart.product.price}}</small></td>
+                <td class='cart-data'><small>Rs {{cart.sub_total}}</small></td>
                 {% if cart.quantity < cart.product.quantity %}
-                <td>
+                <td class='cart-data'>
                     <form action="{% url 'increment-cart' cart.product.id %}" method="GET">
                         {% csrf_token %}
                         <button type="submit" name="product_obj" value="{{cart.id}}" class="cart-button">Increment</button>
                     </form>
                 </td>
                 {% endif %}
-                <td>
+                <td class='cart-data'>
                     <form action="{% url 'decrement-cart' cart.product.id %}" method="GET">
                         {% csrf_token %}
                         <button type="submit" name="product_obj" value="{{cart.id}}" class="cart-button">Decrement</button>
                     </form>
                 </td>
-                <td>
+                <td class='cart-data'>
                     <form action="{% url 'delete-cart' cart.product.id %}" method="GET">
                         {% csrf_token %}
                         <button type="submit" name="product_obj" value="{{cart.id}}" class="cart-button">Remove From Cart</button>
@@ -51,4 +49,8 @@
             {% endfor %}
         </tbody>
     </table>
+    <form action="" method="GET">
+        {% csrf_token %}
+        <button type="submit" name="product_obj" value="" class="cart-button">Checkout</button>
+    </form>
 {% endblock content %}

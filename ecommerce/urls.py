@@ -7,6 +7,7 @@ from main.views import UserRegisterView
 from django.contrib.auth.views import LoginView,LogoutView
 from order.views import CartView,DeleteCart,IncrementCart,DecrementCart
 # from order.views import 
+from order.views import OrderCheckoutForm
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('product/add',ProductForm.as_view(),name='product-add'),
@@ -22,8 +23,9 @@ urlpatterns = [
     path('cart/inc/<int:pk>',IncrementCart.as_view(),name='increment-cart'),
     path('cart/dec/<int:pk>',DecrementCart.as_view(),name='decrement-cart'),
     path('searchbar/',SearchProductView.as_view(),name='searchbar'),
-    path('searchbar/cart/<int:pk>',SearchAddToCart.as_view(),name='search-cart' )
-
+    path('searchbar/cart/<int:pk>',SearchAddToCart.as_view(),name='search-cart' ),
+    path('checkout/',OrderCheckoutForm.as_view(),name='checkout'),
+    # path('orders/',OrderCustomerView.as_view(),name='orders')
 ]
 
 if settings.DEBUG == True:

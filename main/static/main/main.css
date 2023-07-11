@@ -5,9 +5,15 @@
   letter-spacing: 1px;
   box-sizing: border-box;
 }
-
+.category-container-top{
+  min-height: 100vh;
+  background-color: #0056b3;
+  background-size: cover;
+  background-image: url('./QaLgZjUUQqV1uBV88mM047X7VtD2737Ov4HvMSLXey0.gif');
+  background-position: center;
+}
 nav{
-  background:  linear-gradient(to right, #337ab7, #0056b3);
+  background:  linear-gradient(to right, #233e61 50%, #91cbec);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -333,6 +339,15 @@ nav .logo.space{
   gap: 20px;
   padding: 30px;
 }
+.product-grid h1{
+  font-size: 30px;
+  background-color: red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: justify;
+}
 
 .product-card {
   height: 400px;
@@ -430,6 +445,7 @@ nav .logo.space{
 .product-detail-desc-first{
   width:40%;
   background-color: #d8d5d5;
+  border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -441,7 +457,7 @@ nav .logo.space{
   align-items: center;
   justify-content: center;
   /* height: 100vh; */
-  min-height: 100vh;
+  min-height: 80vh;
 }
 .product-detail-content{
   min-width: 50px;
@@ -560,38 +576,45 @@ nav .logo.space{
   transform: scale(0.95);
   transition-duration: .5s;
 }
+/* Cart table styles */
 .cart-table {
   width: 100%;
   border-collapse: collapse;
+  margin-bottom: 20px;
 }
 
 .cart-header {
   font-weight: bold;
   padding: 10px;
-  background-color: #f2f2f2;
   text-align: left;
 }
 
-.cart-image-cell {
-  width: 50px;
-  text-align: center;
-}
-
 .cart-image {
-  width: 15%;
-  aspect-ratio: 3/2;
-  object-fit: contain;
+  width: 50px;
 }
 
 .cart-button {
   background-color: #4CAF50;
   color: white;
   border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
   cursor: pointer;
 }
 
-.cart-button:hover {
-  background-color: #45a049;
+/* Empty cart styles */
+td[colspan="7"] {
+  text-align: center;
+}
+
+h1 {
+  font-size: 24px;
+  color: #333;
+  margin: 20px 0;
+}
+.cart-data{
+
 }

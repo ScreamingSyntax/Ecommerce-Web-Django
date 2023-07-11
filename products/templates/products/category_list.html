@@ -1,6 +1,8 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
+    <div class="category-container-top">
+    </div>
     <h1 class="category-heading">Category List</h1>
     <div class="category-container">
         {% for category in categories %}
@@ -14,6 +16,58 @@
             </div>
         {% empty %}
             <p>No categories available.</p>
+        {% endfor %}
+    </div>
+    <div class="product-grid">
+        <h1><span>Most</span><span> Viewed</span><span> Products</span> </h1>
+        {% for viwed in most_viwed %}
+        <div class="product-card">
+            <div class="product-image-container">
+                <img src="{{ viwed.image.url }}" alt="{{ viwed.name }}" class="product-image" style="width:65%;aspect-ratio:3/2;object-fit:contain">
+            </div>
+            <div class="product-details">
+                <div class="product-info">
+                    <h2 class="product-name">
+                            {{ viwed.name }}
+                    </h2>
+                    <div class="product-info-row">
+                        <span class="product-info-label">Price:</span>
+                        <span class="product-info-value">$ {{ viwed.price }}</span>
+                    </div>
+                </div>
+                <div class="add-to-cart">
+                    <a href="{% url 'product-detail' viwed.id %}" class="add-to-cart-btn">View Product</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="no-products">No products available.</div>
+        {% endfor %}
+    </div>
+    <div class="product-grid">
+        <h1><span>Most</span><span> Sold</span><span> Products</span> </h1>
+        {% for viwed in most_sold %}
+        <div class="product-card">
+            <div class="product-image-container">
+                <img src="{{ viwed.image.url }}" alt="{{ viwed.name }}" class="product-image" style="width:65%;aspect-ratio:3/2;object-fit:contain">
+            </div>
+            <div class="product-details">
+                <div class="product-info">
+                    <h2 class="product-name">
+                            {{ viwed.name }}
+                    </h2>
+                    <div class="product-info-row">
+                        <span class="product-info-label">Price:</span>
+                        <span class="product-info-value">$ {{ viwed.price }}</span>
+                    </div>
+                </div>
+                <div class="add-to-cart">
+                    <a href="{% url 'product-detail' viwed.id %}" class="add-to-cart-btn">View Product</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="no-products">No products available.</div>
         {% endfor %}
     </div>
 {% endblock content %}
