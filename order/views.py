@@ -14,12 +14,23 @@ class CartView(LoginRequiredMixin,ListView):
     # model = Cart
     # context_object_name='carts'
     def get(self,request):
+        # print()
         # Cart.objects.filter()
         user= self.request.user
         cart= user.cart_set.all()
+        # print(cart)
+        grand_total = 0
+        for items in cart:
+            grand_total+=items.sub_total
         context={
-            'carts':cart
+            'carts':cart,
+            'total':grand_total
         }
+        # print(f'
+        # This is cart{cart}')
+
+        # print(grand_total) 
+            # print("Ada")
         return render(self.request,'order/cart_list.html',context)
         # return HttpResponse(self.request,"Hello")
 
@@ -88,3 +99,20 @@ class OrderCheckoutForm(CreateView):
 # class OrderCustomerView(ListView):
 #     model= Order
 #     context_object_name='objects'
+class OrderStatus(TemplateView):
+    template_name='order/order_status.html'
+    def get(self,request):
+        user = self.request.user
+        order = Orders.objects.filter(user=user)
+        orders_list= []
+        for order in order:
+            order_item = OrderItem.objects.filter(order=order)
+            for orders in order_item:
+                orders_list.append(orders)
+        # print(orders_list)
+        context ={
+            'order_list':orders_list
+        }
+        print(context)
+        # print(order)
+        return render(request,'order/order_status.html',context)

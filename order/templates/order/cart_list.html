@@ -49,8 +49,11 @@
             {% endfor %}
         </tbody>
     </table>
-    <form action="" method="GET">
+    <div style="display:flex;gap:40px;padding:20px;justify-content:center;">
+    <p>Grand Total : Rs {{total}}</p>
+    <form action="{% url 'checkout' %}" method="GET">
         {% csrf_token %}
         <button type="submit" name="product_obj" value="" class="cart-button">Checkout</button>
     </form>
+</div>
 {% endblock content %}

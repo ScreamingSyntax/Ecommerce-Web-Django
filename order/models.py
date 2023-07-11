@@ -37,8 +37,6 @@ class Orders(models.Model):
     user_city = models.CharField(max_length=50)
     user_mobile = models.IntegerField()
     final_amount = models.PositiveIntegerField(default=0)
-   
-    
     def get_absolute_url(self):
         return reverse('cart')
     

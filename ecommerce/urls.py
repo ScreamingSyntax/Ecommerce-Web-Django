@@ -3,9 +3,9 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from products.views import ProductForm,ProductsListView, CategoryListView,CategoryDetailView,ProductDetailView,SearchProductView,SearchAddToCart
-from main.views import UserRegisterView
+from main.views import UserRegisterView,profile
 from django.contrib.auth.views import LoginView,LogoutView
-from order.views import CartView,DeleteCart,IncrementCart,DecrementCart
+from order.views import CartView,DeleteCart,IncrementCart,DecrementCart,OrderStatus
 # from order.views import 
 from order.views import OrderCheckoutForm
 urlpatterns = [
@@ -25,7 +25,8 @@ urlpatterns = [
     path('searchbar/',SearchProductView.as_view(),name='searchbar'),
     path('searchbar/cart/<int:pk>',SearchAddToCart.as_view(),name='search-cart' ),
     path('checkout/',OrderCheckoutForm.as_view(),name='checkout'),
-    # path('orders/',OrderCustomerView.as_view(),name='orders')
+    path('status/',OrderStatus.as_view(),name='status'),
+    path('profile/',profile,name='profile')
 ]
 
 if settings.DEBUG == True:

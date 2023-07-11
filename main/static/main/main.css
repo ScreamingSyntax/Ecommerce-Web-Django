@@ -618,3 +618,85 @@ h1 {
 .cart-data{
 
 }
+
+.past-orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.past-orders-table th,
+.past-orders-table td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
+
+.past-orders-table th {
+  font-weight: bold;
+  background-color: #f5f5f5;
+}
+
+.past-orders-table img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
+
+.order-status {
+  font-weight: bold;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .past-orders-table {
+    font-size: 14px;
+  }
+}
+
+  .content-section {
+    margin-top: 50px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .account-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+
+  .account-heading {
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+
+  .text-secondary {
+    color: #777777;
+    margin-bottom: 0;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .border-bottom {
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
+
+  .btn-outline-info {
+    color: #17a2b8;
+    border-color: #17a2b8;
+  }
+
+  .btn-outline-info:hover {
+    background-color: #17a2b8;
+    color: #fff;
+  }
+

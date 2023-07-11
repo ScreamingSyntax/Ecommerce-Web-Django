@@ -1,0 +1,31 @@
+{% extends 'main/base.html' %}
+{% load mathfilters %}
+
+{% block content %}
+    <table class="past-orders-table">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total(in Rs)</th>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in order_list %}
+                <tr>
+                    <td><img src="{{order.product.image.url}}" alt="Product Image"></td>
+                    <td>{{ order.product.name }}</td>
+                    <td>{{ order.quantity }}</td>
+                    <td>{{ order.product.price }}</td>
+                    <td>{{ order.product.price|mul:order.quantity }}</td>
+                    <td>{{ order.order.date }}</td>
+                    <td class="order-status">{{ order.status }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
