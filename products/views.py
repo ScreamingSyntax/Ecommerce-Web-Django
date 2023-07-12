@@ -76,7 +76,11 @@ class SearchProductView(TemplateView):
     def get(self,request,*args,**kwargs):
         # print(self.request.user)
         product_name = self.request.GET['search']
-        filtered_products = Products.objects.filter(name=product_name)
+        # filtered_products = Products.objects.filter(name=product_name)
+        filtered_products = Products.objects.filter(name__startswith='Shirt').values() or Products.objects.filter(category__name__startswith='T-Shirt').values()
+        for products in filtered_products:
+           print(products["image"])
+        # print(filtered_products)
         context= {
             'searched_products':filtered_products,
         }
