@@ -20,6 +20,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'mathfilters',
     'main.apps.MainConfig',
     'order.apps.OrderConfig',

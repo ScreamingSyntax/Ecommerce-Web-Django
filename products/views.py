@@ -47,7 +47,7 @@ class ProductDetailView(DetailView):
     def post(self,request,pk):
       if not self.request.user.is_authenticated:
           return redirect('login')
-      product_id = request.POST.get("product_obj")
+      product_id = pk
       product_detail = Products.objects.get(id=product_id)
       cart_check = Cart.objects.filter(product=product_detail,user=self.request.user)
     #   print(self.request.path_info)
@@ -63,7 +63,7 @@ class ProductDetailView(DetailView):
            cart.quantity+=1
            cart.save()
            print(Cart.objects.all().first().quantity)
-           messages.success(self.request,'Successfully updated quantity to cart')
+           messages.info(self.request,'Successfully updated quantity to cart')
            return HttpResponseRedirect(self.request.path_info)
          else:
            messages.warning(self.request,'Maximum Quantity Already added Bro')
@@ -77,7 +77,7 @@ class SearchProductView(TemplateView):
         # print(self.request.user)
         product_name = self.request.GET['search']
         # filtered_products = Products.objects.filter(name=product_name)
-        filtered_products = Products.objects.filter(name__startswith='Shirt').values() or Products.objects.filter(category__name__startswith='T-Shirt').values()
+        filtered_products = Products.objects.filter(name__startswith=product_name).values() or Products.objects.filter(category__name__startswith=product_name).values()
         for products in filtered_products:
            print(products["image"])
         # print(filtered_products)

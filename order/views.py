@@ -11,14 +11,9 @@ from django.http import HttpResponse,HttpResponseRedirect
 
 class CartView(LoginRequiredMixin,ListView):
     template_name='order/cart.html'
-    # model = Cart
-    # context_object_name='carts'
     def get(self,request):
-        # print()
-        # Cart.objects.filter()
         user= self.request.user
         cart= user.cart_set.all()
-        # print(cart)
         grand_total = 0
         for items in cart:
             grand_total+=items.sub_total
@@ -26,28 +21,16 @@ class CartView(LoginRequiredMixin,ListView):
             'carts':cart,
             'total':grand_total
         }
-        # print(f'
-        # This is cart{cart}')
-
-        # print(grand_total) 
-            # print("Ada")
         return render(self.request,'order/cart_list.html',context)
-        # return HttpResponse(self.request,"Hello")
 
 class DeleteCart(LoginRequiredMixin,TemplateView):
-    # template_name='order/cart_list.html'
     template_name = 'order/cart_list.html'
 
     def get(self, request, *args, **kwargs):
         cart_id = request.GET.get('product_obj')
-        # print(self.request.user)
         user = self.request.user
         user.cart_set.get(id=cart_id).delete()
         return redirect('cart')
-    # def post(self,request,pk):
-    # product_id = request.POST.get(pk=pk)
-    # print(f'thsi si product_id {pk}')
-    # return reverse_lazy('cart_list')
 
 class IncrementCart(LoginRequiredMixin,TemplateView):
     template_name='order/cart_list.html'
@@ -96,9 +79,6 @@ class OrderCheckoutForm(LoginRequiredMixin,CreateView):
         Cart.objects.all().delete()
         return super().form_valid(form)
 
-# class OrderCustomerView(ListView):
-#     model= Order
-#     context_object_name='objects'
 class OrderStatus(LoginRequiredMixin,TemplateView):
     template_name='order/order_status.html'
     def get(self,request):
@@ -109,10 +89,9 @@ class OrderStatus(LoginRequiredMixin,TemplateView):
             order_item = OrderItem.objects.filter(order=order)
             for orders in order_item:
                 orders_list.append(orders)
-        # print(orders_list)
         context ={
             'order_list':orders_list
         }
         print(context)
-        # print(order)
+
         return render(request,'order/order_status.html',context)

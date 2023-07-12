@@ -673,3 +673,7 @@ h1 {
   .account-heading {
     font-size: 2.5rem;
   }
+.category-detail-cart{
+  background-color: transparent;
+  border: none;
+}
