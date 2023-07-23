@@ -1,8 +1,17 @@
-{% extends 'main/base.html' %}
-{% block content %}
-<form action="" method="POST">
-{% csrf_token %}
-    {{form}}
-<button type="submit">Checkout</button>
-</form>
+{% extends 'main/base.html' %} {% load crispy_forms_tags %} {% block content %}
+{% comment %}
+<h1>Checkout</h1>
+{% endcomment %}
+<div class="content-section">
+  <form method="POST" action="{% url 'checkout' %}">
+    {% csrf_token %}
+    <fieldset class="form-group">
+      <legend class="border-bottom mb-4">Login</legend>
+      {{ form|crispy }}
+    </fieldset>
+    <div class="form-group">
+      <button class="btn btn-outline-info" type="submit">Checkout</button>
+    </div>
+  </form>
+</div>
 {% endblock content %}
